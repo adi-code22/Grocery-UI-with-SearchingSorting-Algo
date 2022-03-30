@@ -41,6 +41,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int sortindex = 0;
+  String s = "";
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +69,13 @@ class _HomePageState extends State<HomePage> {
                   height: 50,
                   width: 250,
                   child: TextField(
+                    onChanged: (value) {
+                      s = value;
+                      setState(() {
+                        databox(sortindex, value);
+                        print("+=======main setstate=======>" + s);
+                      });
+                    },
                     style: new TextStyle(
                       color: Colors.blue,
                     ),
@@ -102,36 +110,55 @@ class _HomePageState extends State<HomePage> {
                                               style: TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold)),
-                                          IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                sortindex = 1;
-                                                databox(sortindex);
+                                          Column(
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    sortindex = 1;
 
-                                                Navigator.pop(context);
-                                              });
-                                            },
-                                            icon: Icon(
-                                              Icons.arrow_upward,
-                                              color: sortindex != 1
-                                                  ? Colors.black
-                                                  : Color(0xff219653),
-                                            ),
+                                                    Navigator.pop(context);
+                                                  });
+                                                },
+                                                icon: Icon(
+                                                  Icons.arrow_upward,
+                                                  color: sortindex != 1
+                                                      ? Colors.black
+                                                      : Color(0xff219653),
+                                                ),
+                                              ),
+                                              Text("A -> Z",
+                                                  style: TextStyle(
+                                                      fontSize: 10,
+                                                      color: sortindex != 1
+                                                          ? Colors.black
+                                                          : Color(0xff219653)))
+                                            ],
                                           ),
-                                          IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                sortindex = 2;
-                                                databox(sortindex);
-                                                Navigator.pop(context);
-                                              });
-                                            },
-                                            icon: Icon(
-                                              Icons.arrow_downward,
-                                              color: sortindex != 2
-                                                  ? Colors.black
-                                                  : Color(0xff219653),
-                                            ),
+                                          Column(
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    sortindex = 2;
+
+                                                    Navigator.pop(context);
+                                                  });
+                                                },
+                                                icon: Icon(
+                                                  Icons.arrow_downward,
+                                                  color: sortindex != 2
+                                                      ? Colors.black
+                                                      : Color(0xff219653),
+                                                ),
+                                              ),
+                                              Text("Z -> A",
+                                                  style: TextStyle(
+                                                      fontSize: 10,
+                                                      color: sortindex != 2
+                                                          ? Colors.black
+                                                          : Color(0xff219653)))
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -146,35 +173,55 @@ class _HomePageState extends State<HomePage> {
                                               style: TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold)),
-                                          IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                sortindex = 3;
-                                                databox(sortindex);
-                                                Navigator.pop(context);
-                                              });
-                                            },
-                                            icon: Icon(
-                                              Icons.arrow_upward,
-                                              color: sortindex != 3
-                                                  ? Colors.black
-                                                  : Color(0xff219653),
-                                            ),
+                                          Column(
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    sortindex = 3;
+
+                                                    Navigator.pop(context);
+                                                  });
+                                                },
+                                                icon: Icon(
+                                                  Icons.arrow_upward,
+                                                  color: sortindex != 3
+                                                      ? Colors.black
+                                                      : Color(0xff219653),
+                                                ),
+                                              ),
+                                              Text("1 -> 9",
+                                                  style: TextStyle(
+                                                      fontSize: 10,
+                                                      color: sortindex != 3
+                                                          ? Colors.black
+                                                          : Color(0xff219653)))
+                                            ],
                                           ),
-                                          IconButton(
-                                            onPressed: () {
-                                              setState(() {
-                                                sortindex = 4;
-                                                databox(sortindex);
-                                                Navigator.pop(context);
-                                              });
-                                            },
-                                            icon: Icon(
-                                              Icons.arrow_downward,
-                                              color: sortindex != 4
-                                                  ? Colors.black
-                                                  : Color(0xff219653),
-                                            ),
+                                          Column(
+                                            children: [
+                                              IconButton(
+                                                onPressed: () {
+                                                  setState(() {
+                                                    sortindex = 4;
+
+                                                    Navigator.pop(context);
+                                                  });
+                                                },
+                                                icon: Icon(
+                                                  Icons.arrow_downward,
+                                                  color: sortindex != 4
+                                                      ? Colors.black
+                                                      : Color(0xff219653),
+                                                ),
+                                              ),
+                                              Text("9 -> 1",
+                                                  style: TextStyle(
+                                                      fontSize: 10,
+                                                      color: sortindex != 4
+                                                          ? Colors.black
+                                                          : Color(0xff219653)))
+                                            ],
                                           ),
                                         ],
                                       )
@@ -220,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            databox(sortindex)
+            databox(sortindex, s)
           ],
         ),
       ),
