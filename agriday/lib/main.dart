@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_const
+
 import 'package:agriday/widgets/databox.dart';
 import 'package:flutter/material.dart';
 
@@ -18,13 +20,12 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       home: HomePage(),
@@ -33,7 +34,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -48,11 +49,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Align(
+        title: const Align(
           alignment: Alignment.centerLeft,
-          child: Text(
+          child: const Text(
             "Buy",
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
           ),
         ),
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
+                SizedBox(
                   height: 50,
                   width: 250,
                   child: TextField(
@@ -73,19 +74,18 @@ class _HomePageState extends State<HomePage> {
                       s = value;
                       setState(() {
                         databox(sortindex, value);
-                        print("+=======main setstate=======>" + s);
                       });
                     },
-                    style: new TextStyle(
+                    style: const TextStyle(
                       color: Colors.blue,
                     ),
-                    decoration: new InputDecoration(
+                    decoration: const InputDecoration(
                         prefixIcon: Icon(Icons.search),
                         hintText: "Search",
                         fillColor: Colors.white,
                         filled: true,
                         hintStyle:
-                            new TextStyle(color: Colors.grey, fontSize: 17.0)),
+                            TextStyle(color: Colors.grey, fontSize: 17.0)),
                   ),
                 ),
                 Column(
@@ -106,8 +106,8 @@ class _HomePageState extends State<HomePage> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
                                         children: [
-                                          Text("Name",
-                                              style: TextStyle(
+                                          const Text("Name",
+                                              style: const TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold)),
                                           Column(
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                                                   Icons.arrow_upward,
                                                   color: sortindex != 1
                                                       ? Colors.black
-                                                      : Color(0xff219653),
+                                                      : const Color(0xff219653),
                                                 ),
                                               ),
                                               Text("A -> Z",
@@ -132,7 +132,8 @@ class _HomePageState extends State<HomePage> {
                                                       fontSize: 10,
                                                       color: sortindex != 1
                                                           ? Colors.black
-                                                          : Color(0xff219653)))
+                                                          : const Color(
+                                                              0xff219653)))
                                             ],
                                           ),
                                           Column(
@@ -149,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                                                   Icons.arrow_downward,
                                                   color: sortindex != 2
                                                       ? Colors.black
-                                                      : Color(0xff219653),
+                                                      : const Color(0xff219653),
                                                 ),
                                               ),
                                               Text("Z -> A",
@@ -157,20 +158,21 @@ class _HomePageState extends State<HomePage> {
                                                       fontSize: 10,
                                                       color: sortindex != 2
                                                           ? Colors.black
-                                                          : Color(0xff219653)))
+                                                          : const Color(
+                                                              0xff219653)))
                                             ],
                                           ),
                                         ],
                                       ),
-                                      Divider(
+                                      const Divider(
                                         color: Colors.grey,
                                       ),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
                                         children: [
-                                          Text("Price",
-                                              style: TextStyle(
+                                          const Text("Price",
+                                              style: const TextStyle(
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.bold)),
                                           Column(
@@ -187,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                                                   Icons.arrow_upward,
                                                   color: sortindex != 3
                                                       ? Colors.black
-                                                      : Color(0xff219653),
+                                                      : const Color(0xff219653),
                                                 ),
                                               ),
                                               Text("1 -> 9",
@@ -195,7 +197,8 @@ class _HomePageState extends State<HomePage> {
                                                       fontSize: 10,
                                                       color: sortindex != 3
                                                           ? Colors.black
-                                                          : Color(0xff219653)))
+                                                          : const Color(
+                                                              0xff219653)))
                                             ],
                                           ),
                                           Column(
@@ -212,7 +215,7 @@ class _HomePageState extends State<HomePage> {
                                                   Icons.arrow_downward,
                                                   color: sortindex != 4
                                                       ? Colors.black
-                                                      : Color(0xff219653),
+                                                      : const Color(0xff219653),
                                                 ),
                                               ),
                                               Text("9 -> 1",
@@ -220,7 +223,8 @@ class _HomePageState extends State<HomePage> {
                                                       fontSize: 10,
                                                       color: sortindex != 4
                                                           ? Colors.black
-                                                          : Color(0xff219653)))
+                                                          : const Color(
+                                                              0xff219653)))
                                             ],
                                           ),
                                         ],
@@ -231,14 +235,14 @@ class _HomePageState extends State<HomePage> {
                               );
                             });
                       },
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.sort,
                       ),
                       tooltip: "Sort",
                     ),
-                    Text(
+                    const Text(
                       "Sort",
-                      style: TextStyle(fontSize: 10),
+                      style: const TextStyle(fontSize: 10),
                     )
                   ],
                 )
@@ -248,7 +252,7 @@ class _HomePageState extends State<HomePage> {
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: [
+                children: const [
                   hscroll(
                       "https://media.istockphoto.com/photos/red-apple-with-leaf-isolated-on-white-background-picture-id185262648?b=1&k=20&m=185262648&s=170667a&w=0&h=2ouM2rkF5oBplBmZdqs3hSOdBzA4mcGNCoF2P0KUMTM=",
                       "Apple"),

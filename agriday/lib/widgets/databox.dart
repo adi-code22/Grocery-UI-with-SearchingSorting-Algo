@@ -140,7 +140,7 @@ class _databoxState extends State<databox> {
                                                       ),
                                                       const Text(
                                                         "Product",
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 10),
                                                       )
@@ -159,7 +159,7 @@ class _databoxState extends State<databox> {
                                                       ),
                                                       const Text(
                                                         "avg weight",
-                                                        style: const TextStyle(
+                                                        style: TextStyle(
                                                             color: Colors.grey,
                                                             fontSize: 10),
                                                       )
@@ -238,7 +238,7 @@ class _databoxState extends State<databox> {
                                                                   .price
                                                                   .toString(),
                                                           style: const TextStyle(
-                                                              color: const Color(
+                                                              color: Color(
                                                                   0xff27AE60),
                                                               fontSize: 20),
                                                         ),
@@ -288,12 +288,10 @@ class _databoxState extends State<databox> {
                                                           ),
                                                           const Text(
                                                             "Delivery",
-                                                            style:
-                                                                const TextStyle(
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    fontSize:
-                                                                        10),
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.grey,
+                                                                fontSize: 10),
                                                           )
                                                         ],
                                                       ),
@@ -323,7 +321,7 @@ class _databoxState extends State<databox> {
                     ],
                   );
           } else {
-            return const Center(child: const CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
         });
   }
@@ -341,8 +339,7 @@ class _databoxState extends State<databox> {
           await rootBundle.rootBundle.loadString('lib/Fruits.json');
       final list = json.decode(jsondata) as List<dynamic>;
 
-      List<Fruit> ascendinglist =
-          list.map((d) => new Fruit.fromJson(d)).toList();
+      List<Fruit> ascendinglist = list.map((d) => Fruit.fromJson(d)).toList();
 
       ascendinglist.sort((a, b) {
         return a.product!.toLowerCase().compareTo(b.product!.toLowerCase());
@@ -361,8 +358,7 @@ class _databoxState extends State<databox> {
           await rootBundle.rootBundle.loadString('lib/Fruits.json');
       final list = json.decode(jsondata) as List<dynamic>;
 
-      List<Fruit> ascendinglist =
-          list.map((d) => new Fruit.fromJson(d)).toList();
+      List<Fruit> ascendinglist = list.map((d) => Fruit.fromJson(d)).toList();
 
       ascendinglist.sort((a, b) {
         return a.price!.compareTo(b.price!);

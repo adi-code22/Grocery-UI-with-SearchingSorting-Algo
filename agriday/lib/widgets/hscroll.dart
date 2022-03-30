@@ -29,7 +29,7 @@ class _hscrollState extends State<hscroll> {
                   fit: BoxFit.cover, image: NetworkImage(widget.url)),
               color: Colors.blue,
               border: Border.all(color: Colors.white),
-              borderRadius: BorderRadius.all(Radius.circular(10)),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
             ),
           ),
           Text(widget.name)
