@@ -1,3 +1,4 @@
+import 'package:agriday/chat.dart';
 import 'package:agriday/datamodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' as rootBundle;
@@ -17,40 +18,6 @@ class databox extends StatefulWidget {
 }
 
 class _databoxState extends State<databox> {
-  // List<Fruit> _personList = [];
-  // List<Fruit> _filteredList = [];
-  // String filter = "";
-
-  // @override
-  // void initState() {
-  //   Fruit pdb = new Fruit();
-  //   //List<Fruit> tmpList = <Fruit>[];
-
-  //   setState(() {
-  //     _personList = [];
-  //     _filteredList = _personList;
-  //   });
-  //   if (widget.keyword.isEmpty) {
-  //     setState(() {
-  //       _filteredList = _personList;
-  //     });
-  //   } else {
-  //     setState(() {
-  //       filter = widget.keyword;
-  //     });
-  //   }
-  //   super.initState();
-  // }
-  // if((filter.isNotEmpty)) {
-  //     List<Fruit> tmpList = <Fruit>[];
-  //     for(int i = 0; i < _filteredList.length; i++) {
-  //       if(_filteredList[i].product!.toLowerCase().contains(filter.toLowerCase())) {
-  //         tmpList.add(_filteredList[i]);
-  //       }
-  //     }
-  //     _filteredList = tmpList;
-  //   }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -63,7 +30,6 @@ class _databoxState extends State<databox> {
           } else if (data.hasData) {
             List<Fruit> items = data.data as List<Fruit>;
 
-            List<Fruit> searchList = <Fruit>[];
             List<Fruit> tmpList = <Fruit>[];
             for (var element in items) {
               if (element.product!
@@ -74,7 +40,7 @@ class _databoxState extends State<databox> {
                       .contains(widget.keyword.toString())) {
                 tmpList.add(element);
               }
-              if (tmpList.length != 0) {
+              if (tmpList.isNotEmpty) {
                 items = tmpList;
               } else {
                 items = [];
@@ -89,225 +55,255 @@ class _databoxState extends State<databox> {
                     shrinkWrap: true,
                     itemCount: items.length,
                     itemBuilder: (context, index) {
-                      return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: SizedBox(
-                              height: 180,
-                              child: Column(
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: Container(
-                                      color: Colors.white,
-                                      child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              items[index].seller.toString(),
-                                              style:
-                                                  const TextStyle(fontSize: 15),
-                                            ),
-                                          )),
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Chat(
+                                      items[index].seller,
+                                      items[index].product,
+                                      items[index].variety,
+                                      items[index].price,
+                                      items[index].avgweight,
+                                      items[index].perbox,
+                                      items[index].boxes,
+                                      items[index].delivery)));
+                        },
+                        child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: SizedBox(
+                                height: 180,
+                                child: Column(
+                                  children: [
+                                    Expanded(
+                                      flex: 2,
+                                      child: Container(
+                                        color: Colors.white,
+                                        child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                items[index].seller.toString(),
+                                                style: const TextStyle(
+                                                    fontSize: 15),
+                                              ),
+                                            )),
+                                      ),
                                     ),
-                                  ),
-                                  Expanded(
-                                    flex: 5,
-                                    child: Container(
-                                      child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Text(
-                                                        items[index]
-                                                            .product
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20),
-                                                      ),
-                                                      const Text(
-                                                        "Product",
-                                                        style: TextStyle(
-                                                            color: Colors.grey,
-                                                            fontSize: 10),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      Text(
-                                                        items[index]
-                                                            .avgweight
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20),
-                                                      ),
-                                                      const Text(
-                                                        "avg weight",
-                                                        style: TextStyle(
-                                                            color: Colors.grey,
-                                                            fontSize: 10),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                children: [
-                                                  Column(
-                                                    children: [
-                                                      Text(
-                                                        items[index]
-                                                            .variety
-                                                            .toString(),
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20),
-                                                      ),
-                                                      const Text(
-                                                        "Variety",
-                                                        style: TextStyle(
-                                                            color: Colors.grey,
-                                                            fontSize: 10),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    children: [
-                                                      Text(
-                                                        items[index]
-                                                                .perbox
-                                                                .toString() +
-                                                            "kg",
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20),
-                                                      ),
-                                                      const Text(
-                                                        "per Box",
-                                                        style: TextStyle(
-                                                            color: Colors.grey,
-                                                            fontSize: 10),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                              Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceEvenly,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    child: Container(
-                                                      height: 30,
-                                                      width: 100,
-                                                      color: const Color(
-                                                          0xff21212114),
-                                                      child: Align(
-                                                        alignment:
-                                                            Alignment.center,
-                                                        child: Text(
-                                                          "₹" +
-                                                              items[index]
-                                                                  .price
-                                                                  .toString(),
-                                                          style: const TextStyle(
-                                                              color: Color(
-                                                                  0xff27AE60),
-                                                              fontSize: 20),
+                                    Expanded(
+                                      flex: 5,
+                                      child: Container(
+                                        child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Text(
+                                                          items[index]
+                                                              .product
+                                                              .toString(),
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 20),
+                                                        ),
+                                                        const Text(
+                                                          "Product",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.grey,
+                                                              fontSize: 10),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      children: [
+                                                        Text(
+                                                          items[index]
+                                                              .avgweight
+                                                              .toString(),
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 20),
+                                                        ),
+                                                        const Text(
+                                                          "avg weight",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.grey,
+                                                              fontSize: 10),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    Column(
+                                                      children: [
+                                                        Text(
+                                                          items[index]
+                                                              .variety
+                                                              .toString(),
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 20),
+                                                        ),
+                                                        const Text(
+                                                          "Variety",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.grey,
+                                                              fontSize: 10),
+                                                        )
+                                                      ],
+                                                    ),
+                                                    Column(
+                                                      children: [
+                                                        Text(
+                                                          items[index]
+                                                                  .perbox
+                                                                  .toString() +
+                                                              "kg",
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 20),
+                                                        ),
+                                                        const Text(
+                                                          "per Box",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.grey,
+                                                              fontSize: 10),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                                Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                      child: Container(
+                                                        height: 30,
+                                                        width: 100,
+                                                        color: const Color(
+                                                            // ignore: use_full_hex_values_for_flutter_colors
+                                                            0xff21212114),
+                                                        child: Align(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: Text(
+                                                            "₹" +
+                                                                items[index]
+                                                                    .price
+                                                                    .toString(),
+                                                            style: const TextStyle(
+                                                                color: Color(
+                                                                    0xff27AE60),
+                                                                fontSize: 20),
+                                                          ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Column(
-                                                        children: [
-                                                          Text(
-                                                            items[index]
-                                                                .boxes
-                                                                .toString(),
-                                                            style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 20),
-                                                          ),
-                                                          const Text(
-                                                            "Boxes",
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontSize: 10),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 25,
-                                                      ),
-                                                      Column(
-                                                        children: [
-                                                          Text(
-                                                            items[index]
-                                                                .boxes
-                                                                .toString(),
-                                                            style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 20),
-                                                          ),
-                                                          const Text(
-                                                            "Delivery",
-                                                            style: TextStyle(
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontSize: 10),
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          )),
-                                      color: const Color(0xFFF4F4DD),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Column(
+                                                          children: [
+                                                            Text(
+                                                              items[index]
+                                                                  .boxes
+                                                                  .toString(),
+                                                              style: const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 20),
+                                                            ),
+                                                            const Text(
+                                                              "Boxes",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize: 10),
+                                                            )
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                          width: 25,
+                                                        ),
+                                                        Column(
+                                                          children: [
+                                                            Text(
+                                                              items[index]
+                                                                  .boxes
+                                                                  .toString(),
+                                                              style: const TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  fontSize: 20),
+                                                            ),
+                                                            const Text(
+                                                              "Delivery",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  fontSize: 10),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            )),
+                                        color: const Color(0xFFF4F4DD),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ));
+                            )),
+                      );
                     })
                 : Column(
                     children: const [

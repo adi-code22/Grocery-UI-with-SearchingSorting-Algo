@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_const
 
+import 'package:agriday/chat.dart';
 import 'package:agriday/widgets/databox.dart';
 import 'package:flutter/material.dart';
 
@@ -25,10 +26,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      routes: {
+        '/chat': (context) => Chat("", "", "", 0, 0, 0, 0, ""),
+      },
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }
