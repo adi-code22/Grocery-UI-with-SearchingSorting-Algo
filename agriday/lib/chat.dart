@@ -1,8 +1,8 @@
+import 'package:agriday/widgets/messagein.dart';
+import 'package:agriday/widgets/messageout.dart';
 import 'package:flutter/material.dart';
 
 class Chat extends StatefulWidget {
-  List<String> messages = ["Hi", "Hello", "Hi There"];
-
   String? seller;
   String? product;
   String? variety;
@@ -15,7 +15,7 @@ class Chat extends StatefulWidget {
       this.perbox, this.boxes, this.delivery,
       {Key? key})
       : super(key: key);
-
+  List<String> messages = <String>["How fast can you deliver?"];
   @override
   State<Chat> createState() => _ChatState();
 }
@@ -23,6 +23,7 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
+    TextEditingController _controller = TextEditingController();
     return Scaffold(
       backgroundColor: const Color(0xffE5E5E5),
       appBar: AppBar(
@@ -53,9 +54,9 @@ class _ChatState extends State<Chat> {
                 alignment: Alignment.centerLeft,
                 child: Text("Lot Details",
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25,
-                    )),
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold)),
               ),
             ),
             Padding(
@@ -241,6 +242,58 @@ class _ChatState extends State<Chat> {
                       ),
                     ],
                   ),
+                ),
+              ),
+            ),
+            MessageIn("Hello Buyer we have " +
+                widget.product.toString() +
+                " ready to ship"),
+            MessageIn("Do let me know"),
+            ListView.builder(
+                itemCount: widget.messages.length,
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return MessageOut(widget.messages[index]);
+                })
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: <Widget>[
+            const SizedBox(
+              width: 15,
+              height: 55,
+            ),
+            Expanded(
+              child: TextField(
+                controller: _controller,
+                decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.all(3),
+                    hintText: "Message",
+                    hintStyle: TextStyle(color: Colors.black54),
+                    border: InputBorder.none),
+              ),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xff27AE60),
+                ),
+                onPressed: () {
+                  setState(() {
+                    widget.messages.add(_controller.text);
+                  });
+                },
+                child: const Icon(
+                  Icons.send,
+                  color: Colors.white,
+                  size: 18,
                 ),
               ),
             ),

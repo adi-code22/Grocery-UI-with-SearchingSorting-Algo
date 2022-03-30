@@ -27,9 +27,9 @@ class _hscrollState extends State<hscroll> {
             decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover, image: NetworkImage(widget.url)),
-              color: Colors.blue,
+              color: Color(0xFFF4F4DD),
               border: Border.all(color: Colors.white),
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
             ),
           ),
           Text(widget.name)
